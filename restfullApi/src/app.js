@@ -70,6 +70,20 @@ app.patch("/student/:id", async (req, res) => {
   }
 });
 
+// delete the student info
+app.delete("/student/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const deleteStudent = await Student.findByIdAndDelete(id);
+    if (!req.params.id) {
+      return res.status(400).send();
+    }
+    res.send(deleteStudent);
+  } catch (e) {
+    res.status().send(e);
+  }
+});
+
 app.listen(port, () => {
   console.log(`connection is setup at ${port} from express(app.js)`);
 });
