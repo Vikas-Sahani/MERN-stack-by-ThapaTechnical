@@ -1,3 +1,4 @@
+// how do we know that we can do CRUD in any url for example in img url we cann't do but github url we can do
 const express = require("express");
 require("./db/connection"); // importing connection.js file
 const Student = require("./models/students"); // importing students.js file = table
@@ -45,11 +46,27 @@ app.get("/student/:id", async (req, res) => {
     } else {
       //send data
       res.send(studentData);
-      console.log(studentData);
+      console.log("get single person ", studentData);
     }
   } catch (e) {
     res.status(500).send(e); // statusCode:500 is for Internal Server Error which means data is not available in server
     console.log(e);
+  }
+});
+
+//updat the student by it's email
+app.patch("/student/:id", async (req, res) => {
+  try {
+    const _id = req.params.id;
+    console.log(_id);
+    const updateStudent = await Student.findByIdAndUpdate({ _id }, req.body, {
+      new: true, // with the help of this ek hi bar me update ho jata h otherwise 2 bar send button of Postman per click karna padta h
+    });
+    res.send(updateStudent);
+    console.log("inside Patch : ", updateStudent);
+  } catch (e) {
+    res.status(404).send(e);
+    console.log("err", e);
   }
 });
 
