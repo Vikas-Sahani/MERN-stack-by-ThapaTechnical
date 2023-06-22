@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.set('strictQuery', true);
+mongoose.set("strictQuery", true);
 
 //no need of these lines. instead of below 3 lines we have added above one lines
 // ,{
@@ -8,9 +8,11 @@ mongoose.set('strictQuery', true);
 //     useNewUrlParser:true,
 //     useUnifiedTopology:true
 // }
-mongoose.connect("mongodb://localhost:27017/students-api")
-.then(()=>{
+mongoose
+  .connect("mongodb://localhost:27017/students-api")
+  .then(() => {
     console.log("connection is successful");
-}).catch(e=>{
-    console.log("No connection")
-})
+  })
+  .catch((e) => {
+    console.log("No connection");
+  });
